@@ -1,0 +1,49 @@
+SwR
+vlan 40
+ name Security
+vlan 60
+ name Vezetoseg
+vlan 90
+ name Mngmnt
+ exit
+
+SwK
+vlan 60
+ name vezetoseg
+vlan 90
+ name Mngmnt
+vlan 20
+ name Guest
+ exit
+
+SwF-1-2
+vlan 10
+ name Dolgozok
+vlan 40
+ name Security
+vlan 90
+ name Mngmnt
+vlan 60
+ name Vezetoseg
+ exit
+
+SwV-1-2-3
+vlan 10
+ name Dolgozok
+vlan 20
+ name Guest
+vlan 30
+ name Irodistak
+vlan 40
+ name Security
+vlan 50
+ name CEO
+vlan 60
+ name Vezetoseg
+vla 70
+ name Rendszergazda
+vlan 80
+ name Server
+vlan 90
+ name Mngmnt
+ exit
