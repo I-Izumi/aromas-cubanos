@@ -1,0 +1,84 @@
+!RR
+!
+enable
+configure terminal
+hostname RR
+!
+interface gig0/1
+ description RR-SwR
+ no shutdown
+ exit
+!
+interface gig0/1.60
+ description R-Vezetoseg-GW
+ encapsulation dot1q 60
+ ip address 10.60.2.254 255.255.255.0
+ exit
+!
+interface gig0/1.40
+ description R-Security-GW
+ encapsulation dot1q 40
+ ip address 10.40.2.254 255.255.255.0
+ exit
+!
+interface gig0/0/0
+ description ISP
+ ip address dhcp
+ no shutdown
+ exit
+!
+interface gig0/0
+ description WiFi-GW
+ ip address 10.10.2.254 255.255.255.0
+ no shutdown
+ exit
+!
+ip dhcp excluded-address 10.10.2.254
+ip dhcp excluded-address 10.40.2.254
+ip dhcp excluded-address 10.60.2.254
+ip dhcp pool R-Vezetoseg
+ dns 10.80.0.2
+ lease 0 1 30
+ default 10.60.2.254
+ network 10.60.2.0 255.255.255.0
+ exit
+!
+ip dhcp pool R-Security
+ dns 10.80.0.2
+ lease 0 1 30
+ default 10.40.2.254
+ network 10.40.2.0 255.255.255.0
+ exit
+!
+ip dhcp pool R-WiFi
+ dns 10.80.0.2
+ lease 0 1 30
+ default 10.10.2.254
+ network 10.10.2.0 255.255.255.0
+ exit
+!
+interface lo0
+ description Router-ID
+ ip address 10.100.2.1 255.255.255.0
+ no shutdown
+!
+ip route 0.0.0.0 0.0.0.0 gig0/0/0
+!
+crypto key generate rsa general-keys modulus 4096
+user admin secret cisco
+service password
+enable secret cisco
+banner motd "Belepni tilos"
+!
+line vty 0 4
+ login local
+ transport input ssh
+ motd
+line vty 5 15
+ no login
+line console 0
+ login local
+ motd
+ exit
+end
+end

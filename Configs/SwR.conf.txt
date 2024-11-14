@@ -1,0 +1,60 @@
+!SwR
+!
+enable
+configure terminal
+hostname SwR
+!
+vlan 40
+ name R-Security
+vlan 60
+ name R-Vezetoseg
+ exit
+!
+interface fa0/1
+ description R-Vezetoseg
+ switchport mode access
+ switchport access vlan 60
+ spanning-tree portfast
+ spanning-tree bpdu enable
+ exit
+!
+interface fa0/2
+ description R-Security
+ switchport mode access
+ switchport access vlan 40
+ spanning-tree portfast
+ spanning-tree bpdu enable
+ exit
+!
+interface gig0/1
+ description SwR-RR
+ switchport mode trunk
+ switchport trunk allowed vlan 40,60,100
+ spanning-tree portfast
+ spanning-tree bpdu enable
+!
+interface range fa0/3 - 24
+ shutdown
+ exit
+!
+interface gig0/2
+ shutdown
+ exit
+!
+crypto key generate rsa general-keys modulus 4096
+user admin secret cisco
+service password
+enable secret cisco
+banner motd "Belepni tilos"
+!
+line vty 0 4
+ login local
+ transport input ssh
+ motd
+line vty 5 15
+ no login
+line console 0
+ login local
+ motd
+ exit
+end
