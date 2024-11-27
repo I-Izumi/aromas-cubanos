@@ -1,49 +1,60 @@
-!SwR
+!SwF-2
 !
 enable
 configure terminal
-hostname SwR
+hostname SwF-2
 !
 vlan 40
- name R-Security
+ name F-Security
 vlan 60
- name R-Vezetoseg
+ name F-Vezetoseg
  exit
 !
 interface fa0/1
- description R-Vezetoseg
- switchport mode access
- switchport access vlan 60
- spanning-tree portfast
- spanning-tree bpdu enable
- exit
-!
-interface fa0/2
- description R-Security
+ description F-Security
  switchport mode access
  switchport access vlan 40
  spanning-tree portfast
  spanning-tree bpdu enable
  exit
 !
-interface gig0/1
- description SwR-RR
- switchport mode trunk
- switchport trunk allowed vlan 40,60,100
+interface fa0/2
+ description F-Vezetoseg
+ switchport mode access
+ switchport access vlan 60
  spanning-tree portfast
  spanning-tree bpdu enable
+ exit
+
+!
+interface range fa0/23 - 24
+ description SwF-SwF-2
+ channel-group 1 mode active
+ channel-protocol lacp
+ exit
+!
+interface po1
+ switchport mode trunk
+ switchport trunk allowed vlan 10,40,60,100
+ switchport trunk native vlan 99
+ exit
 !
 interface vlan 1
  description Mngmnt
- ip address 10.100.2.2
+ ip address 10.100.3.8 255.255.255.0
+ no shutdown
 !
-interface range fa0/3 - 24
+interface range fa0/4 - 22
+ shutdown
+ exit
+interface range gig0/1 - 2
  shutdown
  exit
 !
-interface gig0/2
- shutdown
- exit
+!
+!
+!
+!
 !
 crypto key generate rsa general-keys modulus 4096
 user admin privilege 15 secret cisco
