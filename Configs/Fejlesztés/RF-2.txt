@@ -1,68 +1,52 @@
-!RR
+!RF-2
 !
 enable
 configure terminal
-hostname RR
+hostname RF-2
 !
-interface gig0/1
- description RR-SwR
+interface gig0/0
+ description RF2-RF
+ ip address 10.101.3.5 255.255.255.0
  no shutdown
  exit
 !
-interface gig0/1.60
- description R-Vezetoseg-GW
- encapsulation dot1q 60
- ip address 10.60.2.254 255.255.255.0
- exit
 !
-interface gig0/1.40
- description R-Security-GW
- encapsulation dot1q 40
- ip address 10.40.2.254 255.255.255.0
+interface gig0/2
+ description RF2-SwF
+ ip address 10.100.3.6 255.255.255.0
+ no shutdown
  exit
 !
 interface gig0/0/0
- description ISP
- ip address 200.100.0.1 255.255.255.252
+ description WAN
+ ip address 10.100.5.1 255.255.255.252
  no shutdown
- exit
-!
-interface gig0/0
- description WiFi-GW
- ip address 10.10.2.254 255.255.255.0
- no shutdown
- exit
-!
-ip dhcp excluded-address 10.10.2.254
-ip dhcp excluded-address 10.40.2.254
-ip dhcp excluded-address 10.60.2.254
-ip dhcp pool R-Vezetoseg
- dns 10.80.0.2
- lease 0 1 30
- default 10.60.2.254
- network 10.60.2.0 255.255.255.0
- exit
-!
-ip dhcp pool R-Security
- dns 10.80.0.2
- lease 0 1 30
- default 10.40.2.254
- network 10.40.2.0 255.255.255.0
- exit
-!
-ip dhcp pool R-WiFi
- dns 10.80.0.2
- lease 0 1 30
- default 10.10.2.254
- network 10.10.2.0 255.255.255.0
  exit
 !
 interface lo0
  description Router-ID
- ip address 10.100.2.1 255.255.255.0
+ ip address 10.100.3.2 255.255.255.0
  no shutdown
+ exit
 !
-ip route 0.0.0.0 0.0.0.0 200.100.0.2
+interface gig0/1
+ description F-WiFi-GW
+ encapsulation dot1q 10
+ ip address 10.10.3.254 255.255.255.128
+ no shutdown
+ exit
+!
+ip dhcp excluded-address 10.10.3.254
+!
+ip dhcp pool F-WiFi
+ dns 10.80.0.2
+ lease 0 1 30
+ default 10.10.3.254
+ network 10.10.3.128 255.255.255.128
+ exit
+!
+ip route 0.0.0.0 0.0.0.0 10.101.3.3
+ip route 0.0.0.0 0.0.0.0 10.0.0.2 10
 !
 !
 !
@@ -103,5 +87,4 @@ line console 0
  exec-timeout 10
  motd
  exit
-end
 end
