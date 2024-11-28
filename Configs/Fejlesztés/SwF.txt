@@ -1,68 +1,63 @@
-!RR
+!SwF
 !
 enable
 configure terminal
-hostname RR
+hostname SwF
+!
+vlan 10
+ name F-Dolgozok
+vlan 40
+ name F-Security
+vlan 60
+ name F-Vezetoseg
+ exit
+!
+interface range fa0/1 - 3
+ description F-Dolgozok
+ switchport mode access
+ switchport access vlan 10
+ spanning-tree portfast
+ spanning-tree bpdu enable
+ exit
 !
 interface gig0/1
- description RR-SwR
- no shutdown
+ description SwF-RF
+ switchport mode trunk
+ switchport trunk allowed vlan 10,40,60,100
+ spanning-tree portfast
+ spanning-tree bpdu enable
+!
+interface gig0/2
+ description SwF-RF-2
+ switchport mode trunk
+ switchport trunk allowed vlan 10,40,60,100
+ spanning-tree portfast
+ spanning-tree bpdu enable
+!
+interface range fa0/23 - 24
+ description SwF-SwF-2
+ channel-group 1 mode active
+ channel-protocol lacp
  exit
 !
-interface gig0/1.60
- description R-Vezetoseg-GW
- encapsulation dot1q 60
- ip address 10.60.2.254 255.255.255.0
+interface po1
+ switchport mode trunk
+ switchport trunk allowed vlan 10,40,60,100
+ switchport trunk native vlan 99
  exit
 !
-interface gig0/1.40
- description R-Security-GW
- encapsulation dot1q 40
- ip address 10.40.2.254 255.255.255.0
- exit
-!
-interface gig0/0/0
- description ISP
- ip address dhcp
- no shutdown
- exit
-!
-interface gig0/0
- description WiFi-GW
- ip address 10.10.2.254 255.255.255.0
- no shutdown
- exit
-!
-ip dhcp excluded-address 10.10.2.254
-ip dhcp excluded-address 10.40.2.254
-ip dhcp excluded-address 10.60.2.254
-ip dhcp pool R-Vezetoseg
- dns 10.80.0.2
- lease 0 1 30
- default 10.60.2.254
- network 10.60.2.0 255.255.255.0
- exit
-!
-ip dhcp pool R-Security
- dns 10.80.0.2
- lease 0 1 30
- default 10.40.2.254
- network 10.40.2.0 255.255.255.0
- exit
-!
-ip dhcp pool R-WiFi
- dns 10.80.0.2
- lease 0 1 30
- default 10.10.2.254
- network 10.10.2.0 255.255.255.0
- exit
-!
-interface lo0
- description Router-ID
- ip address 10.100.2.1 255.255.255.0
+interface vlan 1
+ description Mngmnt
+ ip address 10.100.3.7 255.255.255.0
  no shutdown
 !
-ip route 0.0.0.0 0.0.0.0 gig0/0/0
+interface range fa0/4 - 22
+ shutdown
+ exit
+!
+!
+!
+!
 !
 crypto key generate rsa general-keys modulus 4096
 user admin privilege 15 secret cisco
@@ -99,5 +94,4 @@ line console 0
  exec-timeout 10
  motd
  exit
-end
 end
