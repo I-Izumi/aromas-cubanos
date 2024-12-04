@@ -6,25 +6,28 @@ hostname RF
 !
 interface gig0/1
  description RF-SwF
- ip address 10.100.3.4 255.255.255.0
+ ip address 10.100.3.13 255.255.255.252
  no shutdown
  exit
 !
 interface gig0/0
  description RF-RF2
- ip address 10.101.3.3 255.255.255.0
+ ip address 10.100.3.9 255.255.255.252
+ ip ospf authentication message-digest
+ ip ospf message-digest-key 1 md5 cisco
  no shutdown
  exit
 !
 interface gig0/0/0
  description ISP
  ip address 200.100.0.9 255.255.255.252
+ ip ospf 3 area 0
  no shutdown
  exit
 !
 interface lo0
  description Router-ID
- ip address 200.100.3.1 255.255.255.0
+ ip address 200.100.3.1 255.255.255.248
  no shutdown
  exit
 !
@@ -75,13 +78,15 @@ ip dhcp pool F-Vezetoseg
 !
 ip route 0.0.0.0 0.0.0.0 200.100.0.10
 !
-router ospf 1
- network 10.10.3.0 0.0.0.127 area 0
- network 10.10.3.128 0.0.0.127 area 0
- network 10.40.3.0 0.0.0.255 area 0
- network 10.60.3.0 0.0.0.255 area 0
- network 10.100.3.0 0.0.0.255 area 0
- network 10.101.3.0 0.0.0.255 area 0
+router ospf 3
+ default-information originate
+ network 10.10.3.0 0.0.0.127 area 3
+ network 10.40.3.0 0.0.0.255 area 3
+ network 10.60.3.0 0.0.0.255 area 3
+ network 10.100.3.0 0.0.0.7 area 3
+ network 10.100.3.8 0.0.0.3 area 3
+ passive gig0/1
+ exit
 !
 !
 !

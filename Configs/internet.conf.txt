@@ -1,0 +1,34 @@
+!internet
+!
+enable
+configure terminal
+hostname ISP
+no ip domain-lookup
+!
+interface gig1/0
+ description Raktar
+ ip address 200.100.0.2 255.255.255.252
+ no shutdown
+!
+interface gig3/0
+ description Cafe
+ ip address 200.100.0.6 255.255.255.252
+ no shutdown
+!
+interface gig2/0
+ description Fejlesztes
+ ip address 200.100.0.10 255.255.255.252
+ no shutdown
+!
+interface gig0/0
+ description HQ
+ ip address 200.100.0.14 255.255.255.252
+ no shutdown
+!
+router ospf 1
+ network 200.100.0.0 0.0.0.3 area 0
+ network 200.100.0.4 0.0.0.3 area 0
+ network 200.100.0.8 0.0.0.3 area 0
+ network 200.100.0.12 0.0.0.3 area 0
+ exit
+end
