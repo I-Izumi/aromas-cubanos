@@ -59,12 +59,12 @@ interface range fa0/4 - 22
 !
 !
 !
-crypto key generate rsa general-keys modulus 4096
 user admin privilege 15 secret cisco
 user user privilege 1 secret cisco
 service password
 enable secret cisco
 ip domain-name aromas-cubanos.lan
+crypto key generate rsa general-keys modulus 4096
 no ip domain-lookup
 banner motd "
     _                                     ____      _                           

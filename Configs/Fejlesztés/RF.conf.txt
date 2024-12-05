@@ -7,6 +7,7 @@ hostname RF
 interface gig0/1
  description RF-SwF
  ip address 10.100.3.13 255.255.255.252
+ ip nat inside
  no shutdown
  exit
 !
@@ -15,6 +16,7 @@ interface gig0/0
  ip address 10.100.3.9 255.255.255.252
  ip ospf authentication message-digest
  ip ospf message-digest-key 1 md5 cisco
+ ip nat inside
  no shutdown
  exit
 !
@@ -22,12 +24,15 @@ interface gig0/0/0
  description ISP
  ip address 200.100.0.9 255.255.255.252
  ip ospf 3 area 0
+ ip nat outside
+ ip access-group OUTGOING out
+ ip access-group INCOMING in
  no shutdown
  exit
 !
 interface lo0
  description Router-ID
- ip address 200.100.3.1 255.255.255.248
+ ip address 10.100.3.1 255.255.255.248
  no shutdown
  exit
 !
@@ -35,6 +40,7 @@ interface gig0/1.10
  description F-Dolgozok-GW
  encapsulation dot1q 10
  ip address 10.10.3.126 255.255.255.128
+ ip nat inside
  no shutdown
  exit
 !
@@ -42,6 +48,7 @@ interface gig0/1.40
  description F-Security-GW
  encapsulation dot1q 40
  ip address 10.40.3.254 255.255.255.0
+ ip nat inside
  no shutdown
  exit
 !
@@ -49,6 +56,7 @@ interface gig0/1.60
  description F-Vezetoseg-GW
  encapsulation dot1q 60
  ip address 10.60.3.254 255.255.255.0
+ ip nat inside
  no shutdown
  exit
 !
@@ -88,16 +96,37 @@ router ospf 3
  passive gig0/1
  exit
 !
+ip nat inside source list LAN interface gig0/0/0 overload
+ip access-list standard LAN
+ remark NAT translation list
+ permit 10.10.3.0 0.0.0.255
+ permit 10.40.3.0 0.0.0.255
+ permit 10.60.3.0 0.0.0.255
+ permit 100.100.3.0 0.0.0.255
+ deny any
+ exit
+!
+ip access-list extended OUTGOING
+ remark Prevent every local IP address from leaving the network
+ permit ip 200.100.0.8 0.0.0.3 any
+ deny ip any any
+ exit
+ip access-list extended INCOMING
+ Remark Prevent the outside from reaching the clients with local IP address
+ permit ip any 200.100.0.8 0.0.0.3
+ deny ip any any
+ exit
 !
 !
 !
 !
-crypto key generate rsa general-keys modulus 4096
+!
 user admin privilege 15 secret cisco
 user user privilege 1 secret cisco
 service password
 enable secret cisco
 ip domain-name aromas-cubanos.lan
+crypto key generate rsa general-keys modulus 4096
 no ip domain-lookup
 banner motd "
     _                                     ____      _                           
