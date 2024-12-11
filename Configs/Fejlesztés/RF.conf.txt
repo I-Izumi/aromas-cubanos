@@ -64,21 +64,21 @@ ip dhcp excluded-address 10.10.3.126
 ip dhcp excluded-address 10.40.3.254
 ip dhcp excluded-address 10.60.3.254
 ip dhcp pool F-Dolgozok
- dns 10.80.0.2
+ dns 200.100.0.20
  lease 0 1 30
  default 10.10.3.126
  network 10.10.3.0 255.255.255.128
  exit
 !
 ip dhcp pool F-Security
- dns 10.80.0.2
+ dns 200.100.0.20
  lease 0 1 30
  default 10.40.3.254
  network 10.40.3.0 255.255.255.0
  exit
 !
 ip dhcp pool F-Vezetoseg
- dns 10.80.0.2
+ dns 200.100.0.20
  lease 0 1 30
  default 10.60.3.254
  network 10.60.3.0 255.255.255.0
@@ -106,14 +106,20 @@ ip access-list standard LAN
  deny any
  exit
 !
+!
 ip access-list extended OUTGOING
- remark Prevent every local IP address from leaving the network
  permit ip 200.100.0.8 0.0.0.3 any
+ permit udp 10.0.0.0 0.255.255.255 gt 1024 host 200.100.0.20 eq domain
+ permit tcp 10.0.0.0 0.255.255.255 gt 1024 host 200.100.0.20 eq www
+ permit tcp 10.0.0.0 0.255.255.255 gt 1024 host 200.100.0.20 eq 443
+ deny icmp any any echo-reply
  deny ip any any
  exit
 ip access-list extended INCOMING
- Remark Prevent the outside from reaching the clients with local IP address
  permit ip any 200.100.0.8 0.0.0.3
+ permit udp host 200.100.0.20 eq domain 10.0.0.0 0.255.255.255 gt 1024
+ permit tcp host 200.100.0.20 eq www 10.0.0.0 0.255.255.255 gt 1024
+ permit tcp host 200.100.0.20 eq 443 10.0.0.0 0.255.255.255 gt 1024
  deny ip any any
  exit
 !

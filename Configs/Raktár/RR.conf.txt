@@ -7,30 +7,37 @@ hostname RR
 interface gig0/1
  description RR-SwR
  no shutdown
+ ip nat inside
  exit
 !
 interface gig0/1.60
  description R-Vezetoseg-GW
  encapsulation dot1q 60
  ip address 10.60.2.254 255.255.255.0
+ ip nat inside
  exit
 !
 interface gig0/1.40
  description R-Security-GW
  encapsulation dot1q 40
  ip address 10.40.2.254 255.255.255.0
+ ip nat inside
  exit
 !
 interface gig0/0/0
  description ISP
  ip address 200.100.0.1 255.255.255.252
  ip ospf 2 area 0
+ ip access-group OUTGOING out
+ ip access-group INCOMING in
+ ip nat outside
  no shutdown
  exit
 !
 interface gig0/0
  description WiFi-GW
  ip address 10.10.2.254 255.255.255.0
+ ip nat inside
  no shutdown
  exit
 !
@@ -69,7 +76,37 @@ router ospf 2
  network 10.60.2.0 0.0.0.255 area 2
  network 10.40.2.0 0.0.0.255 area 2
  network 10.10.2.0 0.0.0.255 area 2
- passive gig0/0
+ passive gig0/1
+ exit
+!
+ip nat inside source list LAN interface gig0/0/0 overload
+ip access-list standard LAN
+ remark NAT translation list
+ permit 10.10.2.0 0.0.0.255
+ permit 10.40.2.0 0.0.0.255
+ permit 10.60.2.0 0.0.0.255
+ permit 100.100.2.0 0.0.0.255
+ deny any
+ exit
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!NOT WORKING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ip access-list extended OUTGOING
+ deny ip 10.0.0.0 255.255.255.0
+ permit udp 10.0.0.0 0.255.255.255 gt 1024 host 200.100.0.20 eq domain
+ permit tcp 10.0.0.0 0.255.255.255 gt 1024 host 200.100.0.20 eq www
+ permit tcp 10.0.0.0 0.255.255.255 gt 1024 host 200.100.0.20 eq 443
+ permit ospf host 200.100.0.1 host 200.100.0.2
+ permit ospf host 200.100.0.1 host 224.0.0.5
+ deny icmp any any echo-reply
+ deny ip any any
+ exit
+ip access-list extended INCOMING
+ permit udp host 200.100.0.20 eq domain 10.0.0.0 0.255.255.255 gt 1024
+ permit tcp host 200.100.0.20 eq www 10.0.0.0 0.255.255.255 gt 1024
+ permit tcp host 200.100.0.20 eq 443 10.0.0.0 0.255.255.255 gt 1024
+ permit ospf host 200.100.0.2 host 200.100.0.1
+ permit ospf host 224.0.0.5 host 200.100.0.1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ deny ip any any
  exit
 !
 !
@@ -111,5 +148,4 @@ line console 0
  exec-timeout 10
  motd
  exit
-end
 end
