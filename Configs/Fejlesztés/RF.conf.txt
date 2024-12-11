@@ -106,20 +106,26 @@ ip access-list standard LAN
  deny any
  exit
 !
-!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!MAYBE WORKING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ip access-list extended OUTGOING
- permit ip 200.100.0.8 0.0.0.3 any
+ deny ip 10.0.0.0 255.255.255.0
  permit udp 10.0.0.0 0.255.255.255 gt 1024 host 200.100.0.20 eq domain
  permit tcp 10.0.0.0 0.255.255.255 gt 1024 host 200.100.0.20 eq www
  permit tcp 10.0.0.0 0.255.255.255 gt 1024 host 200.100.0.20 eq 443
+ permit ospf host 200.100.0.1 host 200.100.0.2
+ permit ospf host 200.100.0.1 host 224.0.0.5
+ permit ospf host 200.100.0.1 host 224.0.0.6
  deny icmp any any echo-reply
  deny ip any any
  exit
 ip access-list extended INCOMING
- permit ip any 200.100.0.8 0.0.0.3
  permit udp host 200.100.0.20 eq domain 10.0.0.0 0.255.255.255 gt 1024
  permit tcp host 200.100.0.20 eq www 10.0.0.0 0.255.255.255 gt 1024
  permit tcp host 200.100.0.20 eq 443 10.0.0.0 0.255.255.255 gt 1024
+ permit ospf host 200.100.0.2 host 200.100.0.1
+ permit ospf host 224.0.0.5 host 200.100.0.1
+ permit ospf host 224.0.0.6 host 200.100.0.1
+ permit icmp any any echo
  deny ip any any
  exit
 !
