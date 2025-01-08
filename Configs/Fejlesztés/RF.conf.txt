@@ -25,8 +25,6 @@ interface gig0/0/0
  ip address 200.100.0.9 255.255.255.252
  ip ospf 3 area 0
  ip nat outside
- ip access-group OUTGOING out
- ip access-group INCOMING in
  no shutdown
  exit
 !
@@ -106,33 +104,6 @@ ip access-list standard LAN
  deny any
  exit
 !
-ip access-list extended OUTGOING
- remark deny private address,ping replies; permit DNS,HTTP/S,SSH,OSPF,Pings; All to NAT address
- deny ip 10.0.0.0 255.255.255.0 any
- permit udp 200.100.0.8 0.0.0.3 gt 1024 host 200.100.0.20 eq domain
- permit tcp 200.100.0.8 0.0.0.3 gt 1024 host 200.100.0.20 eq www
- permit tcp 200.100.0.8 0.0.0.3 gt 1024 host 200.100.0.20 eq 443
- permit tcp 200.100.0.8 0.0.0.3 gt 1024 any eq 22
- permit ospf host 200.100.0.9 host 200.100.0.10
- permit ospf host 200.100.0.9 host 224.0.0.5
- permit ospf host 200.100.0.9 host 224.0.0.6
- permit icmp 200.100.0.8 0.0.0.3 any echo
- deny icmp any any echo-reply
- deny ip any any
- exit
-ip access-list extended INCOMING
- remark permit DNS,HTTP/S,SSH,OSPF,Pings; All to NAT address
- permit udp host 200.100.0.20 eq domain 200.100.0.8 0.0.0.3 gt 1024
- permit tcp host 200.100.0.20 eq www 200.100.0.8 0.0.0.3 gt 1024
- permit tcp host 200.100.0.20 eq 443 200.100.0.8 0.0.0.3 gt 1024
- permit tcp any gt 1024 200.100.0.0 0.0.0.255 eq 22
- permit ospf host 200.100.0.10 host 200.100.0.9
- permit ospf host 200.100.0.10 host 224.0.0.5
- permit ospf host 200.100.0.10 host 224.0.0.6
- permit icmp any any echo
- permit icmp any any echo-reply
- deny ip any any
- exit
 !
 !
 !
@@ -140,7 +111,7 @@ ip access-list extended INCOMING
 !
 user admin privilege 15 secret cisco
 user user privilege 1 secret cisco
-service password
+service password-encryption
 enable secret cisco
 ip domain-name aromas-cubanos.lan
 crypto key generate rsa general-keys modulus 4096
