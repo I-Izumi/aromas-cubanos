@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+    <title>Aromas Cubanos</title>
+</head>
+<body>
+    <header>
+        <h1>Aromas Cubanos</h1>
+    </header>
+    <div class="container">
+        <div id="product-list">
+            <div class="product" data-id="1" data-name="Aromas Cuban Cigar" data-price="10">
+                <a href="cuban-cigar.html"><img src="cigar.jpg" alt="Cuban Cigar"></a>
+                <div class="product-info">
+                    <a href="cuban-cigar.html" class="product-name">Aromas Cuban Cigar</a>
+                    <p class="product-price">$50</p>
+                </div>
+                <button onclick="addToCart(1, 'Aromas Cuban Cigar', 50)">Add to Cart</button>
+            </div>
+            <div class="product" data-id="2" data-name="Aromas Arabica Coffee" data-price="20">
+                <a href="arabica-coffee.html"><img src="arabica.jpg" alt="Arabica Coffee"></a>
+                <div class="product-info">
+                    <a href="arabica-coffee.html" class="product-name">Aromas Arabica Coffee</a>
+                    <p class="product-price">$12</p>
+                </div>
+                <button onclick="addToCart(2, 'Aromas Arabica Coffee', 12)">Add to Cart</button>
+            </div>
+            <div class="product" data-id="3" data-name="Cubanos Premium Blend Coffee" data-price="30">
+                <a href="premium-blend-coffee.html"><img src="premium.jpg" alt="Premium Blend Coffee"></a>
+                <div class="product-info">
+                    <a href="premium-blend-coffee.html" class="product-name">Cubanos Premium Blend Coffee</a>
+                    <p class="product-price">$45</p>
+                </div>
+                <button onclick="addToCart(3, 'Cubanos Premium Blend Coffee', 45)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="cart">
+            <h2>Shopping Cart</h2>
+            <div id="cart-items"></div>
+            <p class="cart-total">Total: $<span id="cart-total">0</span></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Aromas Cubanos | Bringing You the Flavors of Cuba!</p>
+    </footer>
+</body>
+</html>

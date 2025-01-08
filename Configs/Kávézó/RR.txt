@@ -1,0 +1,7 @@
+int g0/0
+ ip address 10.10.4.254 255.255.255.0
+ no sh
+int g0/2
+ ip address 10.20.4.254 255.255.255.0
+ no sh
+int 
