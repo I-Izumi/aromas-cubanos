@@ -1,13 +1,12 @@
-!RV-2
+!RF-2
 !
 enable
 configure terminal
-!
-hostname RV-2
+hostname RF-2
 !
 interface gig0/0
- description RV2-RV
- ip address 10.100.1.10 255.255.255.252
+ description RF2-RF
+ ip address 10.100.3.2 255.255.255.252
  ip ospf authentication message-digest
  ip ospf message-digest-key 1 md5 cisco
  no shutdown
@@ -15,19 +14,19 @@ interface gig0/0
 !
 interface gig0/2
  description RF2-SwF
- ip address 10.100.3.14 255.255.255.252
+ ip address 10.100.3.6 255.255.255.252
  no shutdown
  exit
 !
 interface gig0/0/0
  description WAN
- ip address 10.0.0.1 255.255.255.252
+ ip address 10.0.0.2 255.255.255.252
  no shutdown
  exit
 !
 interface lo0
  description Router-ID
- ip address 10.100.3.2 255.255.255.248
+ ip address 10.200.3.2 255.255.255.255
  no shutdown
  exit
 !
@@ -59,13 +58,17 @@ router ospf 3
 !
 !
 !
+!
+!
 user admin privilege 15 secret cisco
 user user privilege 1 secret cisco
 service password
 enable secret cisco
+!
 ip domain-name aromas-cubanos.lan
 crypto key generate rsa general-keys modulus 4096
 no ip domain-lookup
+!
 banner motd "
     _                                     ____      _                           
    / \   _ __ ___  _ __ ___   __ _ ___   / ___|   _| |__   __ _ _ __   ___  ___ 
@@ -94,4 +97,6 @@ line console 0
  exec-timeout 10
  motd
  exit
+!
 end
+wr
