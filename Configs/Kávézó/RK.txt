@@ -16,6 +16,13 @@ int gig0/1
  ip nat inside
  exit
 !
+interface gig0/1.60
+ description R-Vezetoseg-GW
+ encapsulation dot1q 60
+ ip address 10.60.4.254 255.255.255.0
+ ip nat inside
+ exit
+!
 int gig0/2
  desc RK-APKG
  ip address 10.20.4.254 255.255.255.0
