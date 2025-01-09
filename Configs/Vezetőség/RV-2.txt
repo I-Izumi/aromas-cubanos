@@ -1,12 +1,13 @@
-!RF-2
+!RV-2
 !
 enable
 configure terminal
-hostname RF-2
+!
+hostname RV-2
 !
 interface gig0/0
- description RF2-RF
- ip address 10.100.3.10 255.255.255.252
+ description RV2-RV
+ ip address 10.100.1.10 255.255.255.252
  ip ospf authentication message-digest
  ip ospf message-digest-key 1 md5 cisco
  no shutdown
