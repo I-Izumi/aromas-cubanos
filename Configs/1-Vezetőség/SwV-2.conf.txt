@@ -1,17 +1,21 @@
-!SwF-2
+!SwV-2
 !
 enable
 configure terminal
-hostname SwF-2
+!
+hostname SwV-2
 !
 vlan 40
- name F-Security
-vlan 60
- name F-Vezetoseg
+ name V-Security
+vlan 50
+ name V-CEO
  exit
 !
+spanning-tree vlan 30,40,50,100
+spanning-tree mode rapid-pvst
+!
 interface fa0/1
- description F-Security
+ description V-Security
  switchport mode access
  switchport access vlan 40
  spanning-tree portfast
@@ -19,32 +23,43 @@ interface fa0/1
  exit
 !
 interface fa0/2
- description F-Vezetoseg
+ description V-CEO
  switchport mode access
- switchport access vlan 60
+ switchport access vlan 50
  spanning-tree portfast
  spanning-tree bpdu enable
  exit
-
+!
+interface range fa0/21 - 22
+ description SwV-SwV2
+ channel-group 2 mode active
+ channel-protocol lacp
+ exit
 !
 interface range fa0/23 - 24
- description SwF-SwF-2
+ description SwV-SwV2
  channel-group 1 mode active
  channel-protocol lacp
  exit
 !
 interface po1
  switchport mode trunk
- switchport trunk allowed vlan 10,40,60,100
+ switchport trunk allowed vlan 30,40,50,100
+ switchport trunk native vlan 99
+ exit
+!
+interface po2
+ switchport mode trunk
+ switchport trunk allowed vlan 30,40,50,100
  switchport trunk native vlan 99
  exit
 !
 interface vlan 1
  description Mngmnt
- ip address 10.100.3.8 255.255.255.0
+ ip address 10.100.1.2 255.255.255.248
  no shutdown
 !
-interface range fa0/4 - 22
+interface range fa0/4 - 20
  shutdown
  exit
 interface range gig0/1 - 2
@@ -60,9 +75,11 @@ user admin privilege 15 secret cisco
 user user privilege 1 secret cisco
 service password
 enable secret cisco
+!
 ip domain-name aromas-cubanos.lan
 crypto key generate rsa general-keys modulus 4096
 no ip domain-lookup
+!
 banner motd "
     _                                     ____      _                           
    / \   _ __ ___  _ __ ___   __ _ ___   / ___|   _| |__   __ _ _ __   ___  ___ 
@@ -91,4 +108,6 @@ line console 0
  exec-timeout 10
  motd
  exit
+!
 end
+wr

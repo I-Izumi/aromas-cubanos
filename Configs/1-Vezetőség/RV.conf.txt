@@ -7,14 +7,14 @@ hostname RV
 !
 interface gig0/1
  description RV-SwV
- ip address 10.100.1.9 255.255.255.248
+ ip address 10.100.1.13 255.255.255.252
  ip nat inside
  no shutdown
  exit
 !
 interface gig0/0
  description RV-RV2
- ip address 10.100.1.1 255.255.255.252
+ ip address 10.100.1.9 255.255.255.252
  ip ospf authentication message-digest
  ip ospf message-digest-key 1 md5 cisco
  ip nat inside

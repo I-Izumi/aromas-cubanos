@@ -1,57 +1,73 @@
-!SwF
+!SwV
 !
 enable
 configure terminal
-hostname SwF
 !
-vlan 10
- name F-Dolgozok
+hostname SwV
+!
+vlan 30
+ name V-Irodistak
 vlan 40
- name F-Security
-vlan 60
- name F-Vezetoseg
+ name V-Security
+vlan 50
+ name V-CEO
  exit
 !
+spanning-tree vlan 30,40,50,100
+spanning-tree mode rapid-pvst
+!
 interface range fa0/1 - 3
- description F-Dolgozok
+ description F-Irodistak
  switchport mode access
- switchport access vlan 10
+ switchport access vlan 30
  spanning-tree portfast
  spanning-tree bpdu enable
  exit
 !
 interface gig0/1
- description SwF-RF
+ description SwV-RV
  switchport mode trunk
- switchport trunk allowed vlan 10,40,60,100
+ switchport trunk allowed vlan 30,40,50,100
  spanning-tree portfast
  spanning-tree bpdu enable
 !
 interface gig0/2
- description SwF-RF-2
+ description SwV-RV2
  switchport mode trunk
- switchport trunk allowed vlan 10,40,60,100
+ switchport trunk allowed vlan 30,40,50,100
  spanning-tree portfast
  spanning-tree bpdu enable
 !
+interface range fa0/21 - 22
+ description SwV-SwV3
+ channel-group 3 mode auto
+ channel-protocol pagp
+ exit
+!
 interface range fa0/23 - 24
- description SwF-SwF-2
+ description SwV-SwV2
  channel-group 1 mode active
  channel-protocol lacp
  exit
 !
 interface po1
  switchport mode trunk
- switchport trunk allowed vlan 10,40,60,100
+ switchport trunk allowed vlan 30,40,50,100
+ switchport trunk native vlan 99
+ exit
+!
+interface po3
+ switchport mode trunk
+ switchport trunk allowed vlan 30,40,50,100
  switchport trunk native vlan 99
  exit
 !
 interface vlan 1
  description Mngmnt
- ip address 10.100.3.7 255.255.255.0
+ ip address 10.100.1.1 255.255.255.248
  no shutdown
 !
-interface range fa0/4 - 22
+interface range fa0/4 - 20
  shutdown
  exit
 !
@@ -63,9 +79,11 @@ user admin privilege 15 secret cisco
 user user privilege 1 secret cisco
 service password
 enable secret cisco
+!
 ip domain-name aromas-cubanos.lan
 crypto key generate rsa general-keys modulus 4096
 no ip domain-lookup
+!
 banner motd "
     _                                     ____      _                           
    / \   _ __ ___  _ __ ___   __ _ ___   / ___|   _| |__   __ _ _ __   ___  ___ 
@@ -94,4 +112,6 @@ line console 0
  exec-timeout 10
  motd
  exit
+!
 end
+wr
