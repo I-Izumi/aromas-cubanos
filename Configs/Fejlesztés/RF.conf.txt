@@ -6,14 +6,14 @@ hostname RF
 !
 interface gig0/1
  description RF-SwF
- ip address 10.100.3.13 255.255.255.252
+ ip address 10.100.3.5 255.255.255.252
  ip nat inside
  no shutdown
  exit
 !
 interface gig0/0
  description RF-RF2
- ip address 10.100.3.9 255.255.255.252
+ ip address 10.100.3.1 255.255.255.252
  ip ospf authentication message-digest
  ip ospf message-digest-key 1 md5 cisco
  ip nat inside
@@ -29,7 +29,7 @@ interface gig0/0/0
 !
 interface lo0
  description Router-ID
- ip address 10.100.3.1 255.255.255.248
+ ip address 10.200.3.1 255.255.255.255
  no shutdown
  exit
 !
@@ -98,13 +98,16 @@ ip access-list standard LAN
 !
 !
 !
+!
 user admin privilege 15 secret cisco
 user user privilege 1 secret cisco
 service password-encryption
 enable secret cisco
+!
 ip domain-name aromas-cubanos.lan
 crypto key generate rsa general-keys modulus 4096
 no ip domain-lookup
+!
 banner motd "
     _                                     ____      _                           
    / \   _ __ ___  _ __ ___   __ _ ___   / ___|   _| |__   __ _ _ __   ___  ___ 
@@ -133,4 +136,6 @@ line console 0
  exec-timeout 10
  motd
  exit
+!
 end
+wr

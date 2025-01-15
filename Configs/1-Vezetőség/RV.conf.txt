@@ -7,14 +7,14 @@ hostname RV
 !
 interface gig0/1
  description RV-SwV
- ip address 10.100.1.3 255.255.255.252
+ ip address 10.100.1.9 255.255.255.248
  ip nat inside
  no shutdown
  exit
 !
 interface gig0/0
  description RV-RV2
- ip address 10.100.3.9 255.255.255.252
+ ip address 10.100.1.1 255.255.255.252
  ip ospf authentication message-digest
  ip ospf message-digest-key 1 md5 cisco
  ip nat inside
@@ -23,7 +23,7 @@ interface gig0/0
 !
 interface gig0/0/0
  description ISP
- ip address 200.100.0.9 255.255.255.252
+ ip address 200.100.0.18 255.255.255.248
  ip ospf 3 area 0
  ip nat outside
  no shutdown
@@ -31,79 +31,86 @@ interface gig0/0/0
 !
 interface lo0
  description Router-ID
- ip address 10.100.3.1 255.255.255.248
+ ip address 10.200.1.1 255.255.255.255
  no shutdown
  exit
 !
-interface gig0/1.10
- description F-Dolgozok-GW
- encapsulation dot1q 10
- ip address 10.10.3.126 255.255.255.128
+interface gig0/1.30
+ description V-Irodistak-GW
+ encapsulation dot1q 30
+ ip address 10.30.1.254 255.255.255.0
  ip nat inside
  no shutdown
  exit
 !
 interface gig0/1.40
- description F-Security-GW
+ description V-Security-GW
  encapsulation dot1q 40
- ip address 10.40.3.254 255.255.255.0
+ ip address 10.40.1.254 255.255.255.0
  ip nat inside
  no shutdown
  exit
 !
-interface gig0/1.60
- description F-Vezetoseg-GW
- encapsulation dot1q 60
- ip address 10.60.3.254 255.255.255.0
+interface gig0/1.50
+ description V-CEO-GW
+ encapsulation dot1q 50
+ ip address 10.50.1.254 255.255.255.0
  ip nat inside
  no shutdown
  exit
 !
-ip dhcp excluded-address 10.10.3.126
-ip dhcp excluded-address 10.40.3.254
-ip dhcp excluded-address 10.60.3.254
-ip dhcp pool F-Dolgozok
- dns 200.100.0.20
- lease 0 1 30
- default 10.10.3.126
- network 10.10.3.0 255.255.255.128
+interface gig0/1.70
+ description V-Admin-GW
+ encapsulation dot1q 70
+ ip address 10.70.1.254 255.255.255.0
+ ip nat inside
+ no shutdown
  exit
 !
-ip dhcp pool F-Security
+ip dhcp excluded-address 10.30.1.254
+ip dhcp excluded-address 10.40.1.254
+ip dhcp excluded-address 10.50.1.254
+!
+ip dhcp pool V-Irodistak
  dns 200.100.0.20
  lease 0 1 30
- default 10.40.3.254
- network 10.40.3.0 255.255.255.0
+ default 10.30.1.254
+ network 10.30.1.0 255.255.255.0
  exit
 !
-ip dhcp pool F-Vezetoseg
+ip dhcp pool V-Security
  dns 200.100.0.20
  lease 0 1 30
- default 10.60.3.254
- network 10.60.3.0 255.255.255.0
+ default 10.40.1.254
+ network 10.40.1.0 255.255.255.0
  exit
 !
-ip route 0.0.0.0 0.0.0.0 200.100.0.10
+ip dhcp pool V-CEO
+ dns 200.100.0.20
+ lease 0 1 30
+ default 10.50.1.254
+ network 10.50.1.0 255.255.255.0
+ exit
+!
+ip route 0.0.0.0 0.0.0.0 200.100.0.17
 !
 router ospf 3
  default-information originate
- network 10.10.3.0 0.0.0.127 area 3
- network 10.40.3.0 0.0.0.255 area 3
- network 10.60.3.0 0.0.0.255 area 3
- network 10.100.3.0 0.0.0.7 area 3
- network 10.100.3.8 0.0.0.3 area 3
  passive gig0/1
  exit
 !
+ip nat inside source static 10.80.1.1 200.100.0.19
+ip nat inside source static 10.80.1.2 200.100.0.20
 ip nat inside source list LAN interface gig0/0/0 overload
 ip access-list standard LAN
  remark NAT translation list
- permit 10.10.3.0 0.0.0.255
- permit 10.40.3.0 0.0.0.255
- permit 10.60.3.0 0.0.0.255
- permit 100.100.3.0 0.0.0.255
+ permit 10.30.1.0 0.0.0.255
+ permit 10.40.1.0 0.0.0.255
+ permit 10.50.1.0 0.0.0.255
+ permit 100.100.1.0 0.0.0.255
  deny any
  exit
+!
 !
 !
 !
@@ -114,9 +121,11 @@ user admin privilege 15 secret cisco
 user user privilege 1 secret cisco
 service password-encryption
 enable secret cisco
+!
 ip domain-name aromas-cubanos.lan
 crypto key generate rsa general-keys modulus 4096
 no ip domain-lookup
+!
 banner motd "
     _                                     ____      _                           
    / \   _ __ ___  _ __ ___   __ _ ___   / ___|   _| |__   __ _ _ __   ___  ___ 
@@ -145,4 +154,6 @@ line console 0
  exec-timeout 10
  motd
  exit
+!
 end
+wr
