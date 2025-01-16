@@ -11,7 +11,7 @@ vlan 50
  name V-CEO
  exit
 !
-spanning-tree vlan 30,40,50,100
+spanning-tree vlan 30,40,50,70,100
 spanning-tree mode rapid-pvst
 !
 interface fa0/1
@@ -44,13 +44,13 @@ interface range fa0/23 - 24
 !
 interface po1
  switchport mode trunk
- switchport trunk allowed vlan 30,40,50,100
+ switchport trunk allowed vlan 30,40,50,70,100
  switchport trunk native vlan 99
  exit
 !
 interface po2
  switchport mode trunk
- switchport trunk allowed vlan 30,40,50,100
+ switchport trunk allowed vlan 30,40,50,70,100
  switchport trunk native vlan 99
  exit
 !

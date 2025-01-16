@@ -92,6 +92,13 @@ ip dhcp pool V-CEO
  network 10.50.1.0 255.255.255.0
  exit
 !
+ip dhcp pool V-Rendszergazda
+ dns 200.100.0.20
+ lease 0 1 30
+ default 10.70.1.254
+ network 10.70.1.0 255.255.255.0
+ exit
+!
 ip route 0.0.0.0 0.0.0.0 200.100.0.17
 !
 router ospf 3
