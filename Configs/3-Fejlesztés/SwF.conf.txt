@@ -48,7 +48,7 @@ interface po1
 !
 interface vlan 1
  description Mngmnt
- ip address 10.100.3.7 255.255.255.0
+ ip address 10.100.3.9 255.255.255.252
  no shutdown
 !
 interface range fa0/4 - 22

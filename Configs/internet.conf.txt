@@ -25,4 +25,5 @@ interface gig3/0
  ip address 200.100.0.6 255.255.255.252
  no shutdown
 !
+ip route 0.0.0.0 0.0.0.0 200.100.0.18
 end
