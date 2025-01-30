@@ -25,7 +25,6 @@ interface fa0/2
  spanning-tree portfast
  spanning-tree bpdu enable
  exit
-
 !
 interface range fa0/23 - 24
  description SwF-SwF-2
