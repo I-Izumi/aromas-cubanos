@@ -7,17 +7,23 @@ hostname RV-2
 !
 interface gig0/2
  description RV2-SwV
- ip address 10.100.1.14 255.255.255.252
+ ip address 10.100.1.14 255.255.255.0
  ip helper-address 10.80.1.2
  no shutdown
  exit
 !
 interface gig0/0
  description RV2-RV
- ip address 10.100.1.10 255.255.255.252
+ ip address 10.100.1.10 255.255.255.0
  ip ospf authentication message-digest
  ip ospf message-digest-key 1 md5 cisco
  ip helper-address 10.80.1.2
+ no shutdown
+ exit
+!
+interface gig0/0/0
+ description WAN
+ ip address 10.0.0.1 255.255.255.252
  no shutdown
  exit
 !
@@ -78,15 +84,8 @@ line console 0
  motd
  exit
 !
-username RV-WAN password wanpass
-!
-int s0/0/0
- description WAN
- ip address 10.0.0.1 255.255.255.252
- no shutdown
- encapsulation ppp
- ppp authentication pap
- ppp pap sent-username RF-WAN password wanpass
+int g0/2
+ standby 1 ip 10.100.1.254
 !
 end
 wr

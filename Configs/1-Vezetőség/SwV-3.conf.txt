@@ -68,6 +68,7 @@ enable secret cisco
 ip domain-name aromas-cubanos.lan
 crypto key generate rsa general-keys modulus 4096
 no ip domain-lookup
+ip default-gateway 10.100.1.254
 !
 banner motd "
     _                                     ____      _                           
