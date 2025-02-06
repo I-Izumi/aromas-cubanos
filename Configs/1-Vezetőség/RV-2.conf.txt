@@ -21,12 +21,6 @@ interface gig0/0
  no shutdown
  exit
 !
-interface gig0/0/0
- description WAN
- ip address 10.0.0.1 255.255.255.252
- no shutdown
- exit
-!
 interface lo0
  description Router-ID
  ip address 10.200.1.2 255.255.255.248
@@ -83,6 +77,16 @@ line console 0
  exec-timeout 10
  motd
  exit
+!
+username RV-WAN password wanpass
+!
+int s0/0/0
+ description WAN
+ ip address 10.0.0.1 255.255.255.252
+ no shutdown
+ encapsulation ppp
+ ppp authentication pap
+ ppp pap sent-username RF-WAN password wanpass
 !
 end
 wr
