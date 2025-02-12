@@ -1,4 +1,4 @@
-vlsm-et visszaírni
-átalakítani mngmnt vlant (virtual cím egy hálózatban gig0/1-el és rf2 gig0/2-vel)
+✔ vlsm-et visszaírni 
+✔ átalakítani mngmnt vlant (virtual cím egy hálózatban gig0/1-el és rf2 gig0/2-vel)
 hsrp befejezése vezetőségben
 fejlesztésben is megcsinálni
