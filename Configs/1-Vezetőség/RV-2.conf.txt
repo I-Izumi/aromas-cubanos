@@ -5,18 +5,17 @@ configure terminal
 !
 hostname RV-2
 !
-interface gig0/2
- description RV2-SwV
- ip address 10.100.1.14 255.255.255.0
+interface gig0/1
+ description RV2-SwV3
+ ip address 10.100.1.5 255.255.255.0
  ip helper-address 10.80.1.2
+ ip nat inside
  no shutdown
  exit
 !
-interface gig0/0
- description RV2-RV
- ip address 10.100.1.10 255.255.255.0
- ip ospf authentication message-digest
- ip ospf message-digest-key 1 md5 cisco
+interface gig0/2
+ description RV2-SwV
+ ip address 10.100.1.18 255.255.255.240
  ip helper-address 10.80.1.2
  no shutdown
  exit
@@ -32,13 +31,7 @@ interface lo0
  ip address 10.200.1.2 255.255.255.248
  no shutdown
  exit
-!
-router ospf 3
- network 10.80.0.0 0.0.0.127 area 3
- passive gig0/2
- passive fa0/1/0
- passive fa0/1/1
- exit
+,
 !
 !
 !

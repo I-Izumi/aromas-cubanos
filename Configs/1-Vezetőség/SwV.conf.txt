@@ -33,13 +33,6 @@ interface gig0/1
  spanning-tree portfast
  spanning-tree bpdu enable
 !
-interface gig0/2
- description SwV-RV2
- switchport mode trunk
- switchport trunk allowed vlan 30,40,50,70,100
- spanning-tree portfast
- spanning-tree bpdu enable
-!
 interface range fa0/21 - 22
  description SwV-SwV3
  channel-group 3 mode active
@@ -66,7 +59,7 @@ interface po3
 !
 interface vlan 1
  description Mngmnt
- ip address 10.100.1.1 255.255.255.248
+ ip address 10.100.1.1 255.255.255.0
  no shutdown
 !
 interface range fa0/4 - 20
