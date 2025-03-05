@@ -16,6 +16,7 @@ interface range fa0/1 - 2
  description V-Rendszergazda
  switchport mode access
  switchport access vlan 70
+ spanning-tree bpdu enable
  spanning-tree portfast
  exit
 !
@@ -23,12 +24,14 @@ interface range fa0/21 - 22
  description SwV-SwV3
  channel-group 3 mode active
  channel-protocol lacp
+ switchport trunk native vlan 99
  exit
 !
 interface range fa0/23 - 24
  description SwV2-SwV3
  channel-group 2 mode active
  channel-protocol lacp
+ switchport trunk native vlan 99
  exit
 !
 interface po2

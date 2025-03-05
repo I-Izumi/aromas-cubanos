@@ -15,7 +15,7 @@ vlan 70
  name V-Rendszergazda
  exit
 !
-spanning-tree vlan 30,40,50,70,100
+spanning-tree vlan 1,30,40,50,70,100
 spanning-tree mode rapid-pvst
 !
 interface range fa0/1 - 3
@@ -49,6 +49,7 @@ interface po1
  switchport mode trunk
  switchport trunk allowed vlan 30,40,50,70,100
  switchport trunk native vlan 99
+ spanning-tree vlan 1,30,40,50,70,100
  exit
 !
 interface po3

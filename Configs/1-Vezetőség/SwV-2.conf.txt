@@ -34,12 +34,14 @@ interface range fa0/21 - 22
  description SwV-SwV2
  channel-group 2 mode active
  channel-protocol lacp
+ switchport trunk native vlan 99
  exit
 !
 interface range fa0/23 - 24
  description SwV-SwV2
  channel-group 1 mode active
  channel-protocol lacp
+ switchport trunk native vlan 99
  exit
 !
 interface po1
