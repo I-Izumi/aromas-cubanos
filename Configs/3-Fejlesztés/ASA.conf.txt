@@ -1,0 +1,65 @@
+!ASA
+!
+enable
+
+configure terminal
+hostname ASA
+!
+no service-policy global_policy global
+no policy-map type inspect dns preset_dns_map
+no policy-map global_policy
+no class-map inspection_default
+!
+!
+!
+interface gig1/1
+ nameif inside
+ security-level 100
+ ip address 10.201.0.2 255.255.255.252
+interface gig1/2
+ nameif outside
+ security-level 0
+ ip address 200.100.0.9 255.255.255.252
+ exit
+!
+route outside 0.0.0.0 0.0.0.0 200.100.0.10 1
+!
+router ospf 1
+ log-adjacency-changes
+ network 10.201.0.0 255.255.255.252 area 0
+ default-information originate
+ exit
+!
+object network INSIDE-LEAD
+ subnet 10.60.3.0 255.255.255.0
+ nat (inside,outside) dynamic interface
+object network INSIDE-SECURITY
+ subnet 10.40.3.0 255.255.255.0
+ nat (inside,outside) dynamic interface
+object network INSIDE-WIFI
+ subnet 10.10.3.128 255.255.255.128
+ nat (inside,outside) dynamic interface
+object network INSIDE-WORKER
+ subnet 10.10.3.0 255.255.255.128
+ nat (inside,outside) dynamic interface
+ exit
+!
+access-list OUT extended permit icmp any object INSIDE-LEAD
+access-list OUT extended permit icmp any object INSIDE-SECURITY
+access-list OUT extended permit icmp any object INSIDE-WIFI
+access-list OUT extended permit icmp any object INSIDE-WORKER
+!
+access-group OUT in interface outside
+!
+configure terminal
+class-map INSPECTION-DEFAULT
+ match default-inspection-traffic
+ exit
+policy-map GLOBAL-POLICY
+ class INSPECTION-DEFAULT
+ inspect icmp
+ inspect http
+ inspect dns
+ exit
+service-policy GLOBAL-POLICY global
+!

@@ -20,10 +20,9 @@ interface gig0/0
  no shutdown
  exit
 !
-interface gig0/0/0
- description ISP
- ip address 200.100.0.9 255.255.255.252
- ip nat outside
+interface gig0/2
+ description ASA
+ ip address 10.201.0.1 255.255.255.252
  no shutdown
  exit
 !
@@ -37,7 +36,6 @@ interface gig0/1.10
  description F-Dolgozok-GW
  encapsulation dot1q 10
  ip address 10.10.3.126 255.255.255.128
- ip nat inside
  no shutdown
  exit
 !
@@ -45,7 +43,6 @@ interface gig0/1.40
  description F-Security-GW
  encapsulation dot1q 40
  ip address 10.40.3.254 255.255.255.0
- ip nat inside
  no shutdown
  exit
 !
@@ -53,7 +50,6 @@ interface gig0/1.60
  description F-Vezetoseg-GW
  encapsulation dot1q 60
  ip address 10.60.3.254 255.255.255.0
- ip nat inside
  no shutdown
  exit
 !
@@ -81,18 +77,15 @@ ip dhcp pool F-Vezetoseg
  network 10.60.3.0 255.255.255.0
  exit
 !
-ip route 0.0.0.0 0.0.0.0 200.100.0.10
+ip route 0.0.0.0 0.0.0.0 10.201.0.2
 !
-ip nat inside source list LAN interface gig0/0/0 overload
-ip access-list standard LAN
- remark NAT translation list
- permit 10.10.3.0 0.0.0.255
- permit 10.40.3.0 0.0.0.255
- permit 10.60.3.0 0.0.0.255
- permit 100.100.3.0 0.0.0.255
- deny any
+router ospf 1
+ passive-interface GigabitEthernet0/1
+ network 10.10.3.0 0.0.0.127 area 0
+ network 10.40.3.0 0.0.0.255 area 0
+ network 10.60.3.0 0.0.0.255 area 0
+ network 10.201.0.0 0.0.0.3 area 0
  exit
-!
 !
 !
 !

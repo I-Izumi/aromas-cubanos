@@ -22,28 +22,20 @@ interface range fa0/1 - 2
 !
 interface range fa0/21 - 22
  description SwV-SwV3
+ switchport mode trunk
+ switchport trunk allowed vlan 30,40,50,70,100
+ switchport trunk native vlan 99
  channel-group 3 mode active
  channel-protocol lacp
- switchport trunk native vlan 99
  exit
 !
 interface range fa0/23 - 24
  description SwV2-SwV3
+ switchport mode trunk
+ switchport trunk allowed vlan 30,40,50,70,100
+ switchport trunk native vlan 99
  channel-group 2 mode active
  channel-protocol lacp
- switchport trunk native vlan 99
- exit
-!
-interface po2
- switchport mode trunk
- switchport trunk allowed vlan 30,40,50,70,100
- switchport trunk native vlan 99
- exit
-!
-interface po3
- switchport mode trunk
- switchport trunk allowed vlan 30,40,50,70,100
- switchport trunk native vlan 99
  exit
 !
 interface vlan 1

@@ -52,6 +52,7 @@ router ospf 3
  network 10.100.3.8 0.0.0.3 area 3
  passive gig0/1
  passive gig0/2
+ passive gig0/0/0
  exit
 !
 !
