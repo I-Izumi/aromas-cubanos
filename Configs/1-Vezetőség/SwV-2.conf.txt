@@ -5,13 +5,21 @@ configure terminal
 !
 hostname SwV-2
 !
+vlan 30
+ name V-Irodistak
 vlan 40
  name V-Security
 vlan 50
  name V-CEO
+vlan 70
+ name V-Rendszergazda
+vlan 80
+ name V-SERVER
+vlan 100
+ name V-Mngmnt
  exit
 !
-spanning-tree vlan 30,40,50,70,100
+spanning-tree vlan 30,40,50,70,80,100
 !
 interface fa0/1
  description V-Security
@@ -32,7 +40,7 @@ interface fa0/2
 interface range fa0/21 - 22
  description SwV-SwV3
  switchport mode trunk
- switchport trunk allowed vlan 30,40,50,70,100
+ switchport trunk allowed vlan 30,40,50,70,80,100
  switchport trunk native vlan 99
  channel-group 2 mode active
  channel-protocol lacp
@@ -42,7 +50,7 @@ interface range fa0/21 - 22
 interface range fa0/23 - 24
  description SwV-SwV2
  switchport mode trunk
- switchport trunk allowed vlan 30,40,50,70,100
+ switchport trunk allowed vlan 30,40,50,70,80,100
  switchport trunk native vlan 99
  channel-group 1 mode active
  channel-protocol lacp
