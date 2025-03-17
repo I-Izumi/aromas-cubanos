@@ -7,8 +7,6 @@ hostname RF-2
 interface gig0/0
  description RF2-RF
  ip address 10.100.3.2 255.255.255.252
- ip ospf authentication message-digest
- ip ospf message-digest-key 1 md5 cisco
  no shutdown
  exit
 !
@@ -20,7 +18,7 @@ interface gig0/2
 !
 interface gig0/0/0
  description WAN
- ip address 10.0.0.2 255.255.255.252
+ ip address 11.0.0.2 255.255.255.252
  no shutdown
  exit
 !
@@ -47,7 +45,7 @@ ip dhcp pool F-WiFi
 !
 router ospf 3
  network 10.10.3.128 0.0.0.127 area 3
- network 10.0.0.0 0.0.0.3 area 3
+ network 11.0.0.0 0.0.0.3 area 3
  network 10.100.3.0 0.0.0.7 area 3
  network 10.100.3.8 0.0.0.3 area 3
  passive gig0/1

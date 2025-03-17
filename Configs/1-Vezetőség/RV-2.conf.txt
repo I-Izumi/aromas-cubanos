@@ -14,7 +14,7 @@ interface gig0/1
 !
 interface gig0/0/0
  description WAN
- ip address 10.0.0.1 255.255.255.252
+ ip address 11.0.0.1 255.255.255.252
  no shutdown
  exit
 !

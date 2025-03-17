@@ -118,6 +118,9 @@ interface gig0/0/2
 !
 !
 !
+
+!
+!
 !
 user admin privilege 15 secret cisco
 user user privilege 1 secret cisco
