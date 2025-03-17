@@ -82,6 +82,16 @@ ip access-list standard LAN
 !
 !
 !
+ipv6 unicast-routing
+ipv6 dhcp pool LAN
+ address prefix 2001:db8:1984:604::/64
+ exit
+interface gig0/1.60
+ ipv6 enable
+ ipv6 address prefix 2001:db8:1984:604::1/64
+ ipv6 dhcp server LAN
+ ipv6 nd managed-config-flag
+ exit
 !
 !
 !

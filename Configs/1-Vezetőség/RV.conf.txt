@@ -118,8 +118,21 @@ interface gig0/0/2
 !
 !
 !
+ip access-list extended OUTGOING
+ permit tcp any gt 1024 host 200.100.0.20 eq 53
+ permit udp any gt 1024 host 200.100.0.20 eq 80
+ permit udp any gt 1024 host 200.100.0.20 eq 443
 
+ip access-list extended INCOMING
+ permit tcp host 200.100.0.20 eq 53 any gt 1024
+ permit udp host 200.100.0.20 eq 80 any gt 1024
+ permit udp host 200.100.0.20 eq 443 any gt 1024
+ 
+ exit
 !
+interface gig0/0/1
+ ip access-group INCOMING in
+ ip access-group OUTGOING out
 !
 !
 user admin privilege 15 secret cisco
