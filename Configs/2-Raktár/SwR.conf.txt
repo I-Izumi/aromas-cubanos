@@ -14,24 +14,19 @@ interface fa0/1
  description R-Vezetoseg
  switchport mode access
  switchport access vlan 60
- spanning-tree portfast
- spanning-tree bpdu enable
  exit
 !
 interface fa0/2
  description R-Security
  switchport mode access
  switchport access vlan 40
- spanning-tree portfast
- spanning-tree bpdu enable
  exit
 !
 interface gig0/1
  description SwR-RR
  switchport mode trunk
- switchport trunk allowed vlan 40,60,100
- spanning-tree portfast
- spanning-tree bpdu enable
+ switchport trunk allowed vlan 1,40,60,100
+ exit
 !
 interface vlan 1
  description Mngmnt

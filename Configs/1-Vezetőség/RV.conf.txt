@@ -30,6 +30,7 @@ interface gig0/0/1.30
  description V-Irodistak-GW
  encapsulation dot1q 30
  ip address 10.30.1.253 255.255.255.0
+ ip helper-address 10.80.1.2
  ip nat inside
  no shutdown
  exit
@@ -38,6 +39,7 @@ interface gig0/0/1.40
  description V-Security-GW
  encapsulation dot1q 40
  ip address 10.40.1.253 255.255.255.0
+ ip helper-address 10.80.1.2
  ip nat inside
  no shutdown
  exit
@@ -46,6 +48,7 @@ interface gig0/0/1.50
  description V-CEO-GW
  encapsulation dot1q 50
  ip address 10.50.1.253 255.255.255.0
+ ip helper-address 10.80.1.2
  ip nat inside
  no shutdown
  exit
@@ -54,6 +57,7 @@ interface gig0/0/1.70
  description V-Admin-GW
  encapsulation dot1q 70
  ip address 10.70.1.253 255.255.255.0
+ ip helper-address 10.80.1.2
  ip nat inside
  no shutdown
  exit
@@ -62,6 +66,7 @@ interface gig0/0/1.80
  description V-SRV-GW
  encapsulation dot1q 80
  ip address 10.80.1.253 255.255.255.0
+ ip helper-address 10.80.1.2
  ip nat inside
  no shutdown
  exit
@@ -103,14 +108,15 @@ crypto isakmp client configuration group VPN-group
  exit
 !
 crypto ipsec transform-set 1 esp-des esp-sha-hmac
-dynamic map DMAP 1
+crypto dynamic-map DMAP 1
  set transform-set 1
  reverse-route
  exit
-crypto SMAP client configuration address respond
-crypto SMAP client authentication VPN-user
-crypto SMAP ipsec authorization list VPN-group
-crypto SMAP 1 ipse-isakmp dynamic DMAP
+!
+crypto map SMAP client authentication list VPN-user
+crypto map SMAP isakmp authorization list VPN-group
+crypto map SMAP client configuration address respond
+crypto map SMAP 1 ipsec-isakmp dynamic DMAP
 !
 interface gig0/0/2
  crypto map SMAP
@@ -133,6 +139,7 @@ ip access-list extended INCOMING
 interface gig0/0/1
  ip access-group INCOMING in
  ip access-group OUTGOING out
+ exit
 !
 !
 user admin privilege 15 secret cisco

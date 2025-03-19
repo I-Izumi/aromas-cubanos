@@ -19,7 +19,7 @@ vlan 100
  name V-Mngmnt
  exit
 !
-spanning-tree vlan 30,40,50,70,80,100
+spanning-tree vlan 1,30,40,50,70,80,100
 !
 interface fa0/1
  description V-Security

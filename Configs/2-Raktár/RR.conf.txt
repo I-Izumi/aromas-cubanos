@@ -7,7 +7,7 @@ hostname RR
 !
 interface gig0/1
  description RR-SwR
- ip address 10.100.2.1 255.255.255.252
+ ip address 192.168.0.254 255.255.255.0
  no shutdown
  ip nat inside
  exit
@@ -23,6 +23,13 @@ interface gig0/1.40
  description R-Security-GW
  encapsulation dot1q 40
  ip address 10.40.2.254 255.255.255.0
+ ip nat inside
+ exit
+!
+interface gig0/1.100
+ description R-Mngmnt-GW
+ encapsulation dot1q 40
+ ip address 10.100.2.254 255.255.255.0
  ip nat inside
  exit
 !

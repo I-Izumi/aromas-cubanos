@@ -14,16 +14,12 @@ interface fa0/1
  description F-Security
  switchport mode access
  switchport access vlan 40
- spanning-tree portfast
- spanning-tree bpdu enable
  exit
 !
 interface fa0/2
  description F-Vezetoseg
  switchport mode access
  switchport access vlan 60
- spanning-tree portfast
- spanning-tree bpdu enable
  exit
 !
 interface range fa0/23 - 24
@@ -34,7 +30,7 @@ interface range fa0/23 - 24
 !
 interface po1
  switchport mode trunk
- switchport trunk allowed vlan 10,40,60,100
+ switchport trunk allowed vlan 1,10,40,60,100
  switchport trunk native vlan 99
  exit
 !

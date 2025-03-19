@@ -16,23 +16,17 @@ interface range fa0/1 - 3
  description F-Dolgozok
  switchport mode access
  switchport access vlan 10
- spanning-tree portfast
- spanning-tree bpdu enable
  exit
 !
 interface gig0/1
  description SwF-RF
  switchport mode trunk
- switchport trunk allowed vlan 10,40,60,100
- spanning-tree portfast
- spanning-tree bpdu enable
+ switchport trunk allowed vlan 1,10,40,60,100
 !
 interface gig0/2
  description SwF-RF-2
  switchport mode trunk
- switchport trunk allowed vlan 10,40,60,100
- spanning-tree portfast
- spanning-tree bpdu enable
+ switchport trunk allowed vlan 1,10,40,60,100
 !
 interface range fa0/23 - 24
  description SwF-SwF-2
@@ -42,7 +36,7 @@ interface range fa0/23 - 24
 !
 interface po1
  switchport mode trunk
- switchport trunk allowed vlan 10,40,60,100
+ switchport trunk allowed vlan 1,10,40,60,100
  switchport trunk native vlan 99
  exit
 !
