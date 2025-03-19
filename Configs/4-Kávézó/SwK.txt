@@ -19,7 +19,7 @@ interface fa0/1
 interface gig0/1
  description SwK-RK
  switchport mode trunk
- switchport trunk allowed vlan 60,100
+ switchport trunk allowed vlan 1,60,100
  spanning-tree portfast
  spanning-tree bpdu enable
 !
