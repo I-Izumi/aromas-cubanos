@@ -1,19 +1,11 @@
-✔ vlsm-et visszaírni 
-✔ átalakítani mngmnt vlant (virtual cím egy hálózatban gig0/1-el és rf2 gig0/2-vel)
-hsrp ready vlsm
-hsrp befejezése vezetőségben
-fejlesztésben is megcsinálni
-
-hálózatbiztonság
-acl
-asa
-
-dokumentáció
-mngmnt vlan ip-ipv6(wan) beillesztése
-kiirni topologian, melyik eszköz mit csinál, melyik port van rajta kivezetve, címek vége
-ábrákat kicserélni nem szinesre
-egy nagy egybe ábra berakása
-"ábra 1:" -> "1. ábra"
-továbbra is megcsinálni a zilahi-terv alapján
-configokból a legújabbra frissíteni
-ha vége, oldalszám
+IPv6 berakása
+VPN berakása
+ACL berakása
+Windows berakása
+Tesztelés berakása
+---------
+Régi doksik aktualizálása
+Topológia képek cseréje
+Protokollok beírása a hálózati eszközökhöz
+VLSM táblák frissítése
+Konfigok update-elése
