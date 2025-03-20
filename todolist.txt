@@ -1,6 +1,6 @@
-IPv6 berakása
-VPN berakása
-ACL berakása
+✔IPv6 berakása
+✔VPN berakása
+✔ACL berakása
 Windows berakása
 Tesztelés berakása
 ---------
