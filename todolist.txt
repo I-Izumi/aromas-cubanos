@@ -4,7 +4,7 @@
 Windows berakása
 Tesztelés berakása
 ---------
-Régi doksik aktualizálása
+✔Régi doksik aktualizálása
 Topológia képek cseréje
 Protokollok beírása a hálózati eszközökhöz
 VLSM táblák frissítése
