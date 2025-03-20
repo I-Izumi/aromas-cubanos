@@ -20,7 +20,8 @@ A rendszergazdák központilag felügyelik a hálózatot, programozott hálózat
 ![Topology](https://github.com/user-attachments/assets/636cfb03-11a5-438e-8a84-139619cd6de1)
 <br><br>
 
-![image](https://github.com/user-attachments/assets/05de7874-5a86-4d56-9279-aff4e42489f7)
+![Final Topology](https://github.com/user-attachments/assets/92cd3ff5-c483-41b8-aca6-924b999304be)
+
 
 <br>
 
