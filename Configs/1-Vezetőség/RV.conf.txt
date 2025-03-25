@@ -88,6 +88,19 @@ ip access-list standard LAN
 !
 !
 aaa new-model
+!
+ntp server 10.80.1.2
+ntp authenticate
+ntp authentication-key 1 md5 cisco
+ntp update-calendar
+service timestamps log datetime msec
+!
+logging 10.80.1.2
+logging trap debugging
+logging userinfo
+!
+aaa authentication login LOGIN group radius
+aaa authentication enable default group radius
 aaa authentication login VPN-user local
 aaa authorization network VPN-group local
 ip local pool VPN-pool 192.168.0.129 192.168.0.253
@@ -123,17 +136,32 @@ interface gig0/0/2
  exit
 !
 !
+! [DEBUG] ip inspect audit-trail
+ip inspect dns-timeout 7
+ip inspect udp idle-time 1800
+ip inspect tcp idle-time 14400
+ip inspect name INSPECT udp timeout 15
+ip inspect name INSPECT tcp timeout 3600
+interface gig0/0/2
+ ip inspect INSPECT out
+ exit
+radius server LINUX
+ address ipv4 10.80.1.2
+ key cisco
+ exit
+!
 !
 ip access-list extended OUTGOING
  permit tcp any gt 1024 host 200.100.0.20 eq 53
  permit udp any gt 1024 host 200.100.0.20 eq 80
  permit udp any gt 1024 host 200.100.0.20 eq 443
+ deny ip any any
 
 ip access-list extended INCOMING
  permit tcp host 200.100.0.20 eq 53 any gt 1024
  permit udp host 200.100.0.20 eq 80 any gt 1024
  permit udp host 200.100.0.20 eq 443 any gt 1024
- 
+ deny ip any any
  exit
 !
 interface gig0/0/1
@@ -164,7 +192,7 @@ You must have explicit, authorized permission to access or configure this device
 All activities performed on this device are logged and monitored."
 !
 line vty 0 4
- login local
+ login authentication LOGIN
  transport input ssh
  logging synchronous
  exec-timeout 10
