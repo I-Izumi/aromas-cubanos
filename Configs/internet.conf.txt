@@ -16,8 +16,8 @@ interface gig1/0
  no shutdown
 !
 interface gig2/0
- description Fejlesztes
- ip address 200.100.0.10 255.255.255.252
+ description VPN-user
+ ip address 200.101.0.1 255.255.255.252
  no shutdown
 !
 interface gig3/0
@@ -25,5 +25,12 @@ interface gig3/0
  ip address 200.100.0.6 255.255.255.252
  no shutdown
 !
-ip route 0.0.0.0 0.0.0.0 200.100.0.18
+interface gig1/0
+ description Fejlesztes
+ ip address 200.100.0.10 255.255.255.252
+ no shutdown
+ exit
+!
+ip route 200.100.0.19 255.255.255.255 200.100.0.18 
+ip route 200.100.0.20 255.255.255.255 200.100.0.18 
 end
