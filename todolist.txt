@@ -3,9 +3,13 @@
 ✔ACL berakása
 Windows berakása
 ✔Tesztelés berakása
+show parancsok berakása tesztelésbe
 ---------
 ✔Régi doksik aktualizálása
 Topológia képek cseréje
 Protokollok beírása a hálózati eszközökhöz
 VLSM táblák frissítése
 Konfigok update-elése
+---------
+blablabla írása
+tesztelés külön doksi és pdf kimentés pluszba
