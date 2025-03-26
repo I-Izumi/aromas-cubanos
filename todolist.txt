@@ -2,7 +2,7 @@
 ✔VPN berakása
 ✔ACL berakása
 Windows berakása
-Tesztelés berakása
+✔Tesztelés berakása
 ---------
 ✔Régi doksik aktualizálása
 Topológia képek cseréje
