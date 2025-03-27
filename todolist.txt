@@ -3,7 +3,7 @@
 ✔ACL berakása
 Windows berakása (+teszt) OTTHON
 ✔Tesztelés berakása
-show parancsok berakása tesztelésbe
+✔show parancsok berakása tesztelésbe
 ---------
 ✔Régi doksik aktualizálása
 Topológia képek cseréje OTTHON
