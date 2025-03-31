@@ -1,0 +1,25 @@
+Üdvözletem!
+Én ................ vagyok
+És most be szeretném mutatni a vizsgaremekünket
+
+A projektünkben 4 épület található: egy Raktár, kávézó, fejlesztés és egy vezetőség.
+
+Az összes épületben a fő routerek osztanak ip címet és natolnak, illetve AP-kal van megoldva a vezeték nélküli hálózat. Minden eszköz van távoli elérése SSH-n keresztül. Minden épületben vannak dolgozók, középvezetőség, biztonsági őr, viszont a Vezetőségben csak rendszergazdák, irodisták, biztonsági őr és vezetők találhatóak.
+
+A raktár épületünkben található a hálózatprogramozás és a kávézóban 2 vezetéknélküli hálózat található, egy a vendégeknek és egy privát hálózat a dolgozóinknak, továbbá itt találhatóak az IPv6-os címzések.
+
+A vezetőségben nincen vezeték nélküli hálózat és a címeket a Linux szerver osztja az ip címeket. A vezetőségben található még a második és harmadik rétegbeli redundacia,RADIUS szerver a felhasználóknak, SYSLOG, NTP, VPN az R1 router és a Home User között, illetve a Linux és Windows szerverek. Továbbá az R1 forgalomirányítón van CBAC és Access-list.
+
+A vezetőség WAN kapcsolattal van összekötve a Fejlesztés épülettel. Ebben az épületben található a dinamikus forgalomirányítás OSPF protokollal a routerek és az ASA tűzfal között. Illetve a két kapcsoló között port aggregáció van konfigurálva.
+
+
+A Windows szerveren található: 
+-Active directory, 
+-fájl- és nyomtatómegosztás,
+-Automatizált szoftvertelepítés
+-Automatizált biztonsági mentés
+
+A Linux szerveren taláható:
+-DHCP szerver
+-DNS szerver
+-HTTP és HTTPS szerver
