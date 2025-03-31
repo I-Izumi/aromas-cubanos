@@ -1,12 +1,12 @@
 ✔IPv6 berakása
 ✔VPN berakása
 ✔ACL berakása
-Windows berakása (+teszt) OTTHON
+✔Windows berakása (+teszt) OTTHON
 ✔Tesztelés berakása
 ✔show parancsok berakása tesztelésbe
 ---------
 ✔Régi doksik aktualizálása
-Topológia képek cseréje OTTHON
+✔Topológia képek cseréje OTTHON
 ✔VLSM táblák frissítése
 ✔Konfigok update-elése
 ---------
