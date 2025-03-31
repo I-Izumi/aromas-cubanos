@@ -10,6 +10,6 @@
 ✔VLSM táblák frissítése
 ✔Konfigok update-elése
 ---------
-blablabla írása
-tesztelés külön doksi és pdf kimentés pluszba
+✔blablabla írása
+✔tesztelés külön doksi és pdf kimentés pluszba
 ✔teljes konfigok berakása

@@ -1,0 +1,40 @@
+elérési
+	trunk
+	vlan
+	etherchannel
+	HSRP
+	WIFI
+	feszitofa
+dhcp
+	Linux dhcp
+	dhcp
+	dhcpv6
+nat
+	asa nat
+	din nat
+	forg din es stat nat
+halozatbiztonsag
+	acl
+	cbac
+	aaa
+	syslog
+	ntp
+	ssh
+	vpn
+
+halozatkonfiguracios progi
+http/https
+
+windows
+	ad
+	printer sharing
+	software
+	biztonsagi mentes
+linux
+	dhcp
+	dns
+	http/https
+
+29 tema
+max 300 sec
+~10 sec/tema
