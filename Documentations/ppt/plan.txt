@@ -1,0 +1,169 @@
+Rendben, segítek elkészíteni a prezentációt! Az alábbiakban bemutatom a főbb pontokat, amelyeket érdemes belefoglalni a PowerPoint bemutatóba, valamint egy angol összefoglalót is készítek a projektről.
+
+### Prezentáció felépítése
+
+#### 1. Címoldal
+- **Projekt neve:** Aromas Cubanos Manufaktúra
+- **Vizsgaremek dokumentáció**
+- **Szegedi SZC Gábor Dénes Technikum és Szakgimnázium**
+- **2024/2025. tanév**
+- **13.E osztály**
+- **Készítette:** Balázs Zalán, Dobó Zoltán Dávid, Jelenovits Milán
+
+#### 2. Tartalomjegyzék
+- Feladat megtervezése és topológia összeállítása
+- Használt hálózati eszközök
+- IPv4 címzési rendszer (VLSM)
+- IPv6 címzési rendszer (VLSM)
+- IP címek konfigurációja
+- Második rétegbeli redundancia megvalósítása
+- Harmadik rétegbeli redundancia megvalósítása
+- Vezetéknélküli hálózat konfigurációja
+- Statikus forgalomirányítás konfigurációja
+- Dinamikus forgalomirányítás konfigurációja
+- Statikus címfordítás megvalósítása
+- Dinamikus címfordítás megvalósítása
+- WAN összeköttetés
+- VPN kapcsolat megvalósítása
+- Hálózatkonfigurációs program
+- ACL-ek
+- ASA tűzfal konfigurációja
+- NTP és Syslog konfigurációja
+- Hálózati eszközök teljes konfigurációja
+- Windows szerver telepítése virtuális gépre
+- Linux szerver telepítése virtuális gépre
+- Cisco Packet Tracer Tesztelés
+- Oracle VM VirtualBox tesztelés
+- Felhasznált szoftverek
+- Ábrajegyzék
+
+#### 3. Projekt bemutatása
+- **Történet:** Az Aromas Cubanos egy kubai szivargyártó vállalkozás, amely 1975-ben alakult. A cég három fő telephelyet és egy kávézót foglal magába.
+- **Cél:** Biztonságos és gyors hálózati infrastruktúra létrehozása, amely támogatja a cég bővülését és hatékony működését.
+
+#### 4. Hálózat felépítése
+- **Telephelyek:** Gyártó ház és raktár, fejlesztési részleg, vezetői/hálózati központ, kávézó.
+- **VLAN-ok:** Dolgozók, vendégek, irodisták, security, CEO, közép-vezetés, admin, szerverek, management, loopback.
+
+#### 5. Használt hálózati eszközök
+- **Routerek:** Cisco ISR4331, Cisco 2911
+- **Kapcsolók:** Cisco 2960-24TT
+- **Access Pointok:** Cisco AP
+- **Tűzfal:** Cisco ASA
+
+#### 6. IPv4 és IPv6 címzési rendszer
+- **VLSM táblák:** Dolgozók, vendégek, irodisták, security, CEO, közép-vezetés, admin, szerverek, WAN, loopback, ASA, management.
+
+#### 7. IP címek konfigurációja
+- **Konfigurációs példák:** RV, RV-2, SW V, SW V-2, SW V-3, RR, SW R, ASA, RF, RF-2, RK, SW K.
+
+#### 8. Redundancia megvalósítása
+- **Második réteg:** STP protokoll
+- **Harmadik réteg:** HSRP protokoll
+
+#### 9. Vezetéknélküli hálózat konfigurációja
+- **Topológia:** Raktár, fejlesztés, kávézó.
+
+#### 10. Statikus és dinamikus forgalomirányítás
+- **Statikus:** RV, RR, ASA, RK.
+- **Dinamikus:** ASA, RF.
+
+#### 11. Címfordítás megvalósítása
+- **Statikus:** RV, RV-2.
+- **Dinamikus:** RV, RR, ASA, RK.
+
+#### 12. WAN összeköttetés
+- **FTTB:** Fejlesztés és vezetőség között.
+
+#### 13. VPN kapcsolat megvalósítása
+- **Otthoni VPN elérés:** RV forgalomirányító és Home User között.
+
+#### 14. Hálózatkonfigurációs program
+- **Tesztelés:** Python program.
+
+#### 15. ACL-ek és ASA tűzfal konfigurációja
+- **RV forgalomirányító:** ACL-ek.
+- **ASA tűzfal:** Konfiguráció.
+
+#### 16. NTP és Syslog konfigurációja
+- **RV forgalomirányító:** NTP és Syslog beállítások.
+
+#### 17. Hálózati eszközök teljes konfigurációja
+- **Internetszolgáltató:** ISP.
+- **Vezetőség épület:** RV, RV-2, SwV, SwV-2, SwV-3.
+- **Raktár épület:** RR, SwR.
+- **Fejlesztés épület:** ASA, RF, RF-2, SwF, SwF-2.
+- **Kávézó épület:** RK, SwK.
+
+#### 18. Windows szerver telepítése virtuális gépre
+- **Telepítés:** Windows Server 2019.
+- **Címtár:** Active Directory.
+- **Fájl és nyomtató megosztás:** SMB.
+- **Automatizált szoftvertelepítés:** Csoportházirend.
+- **Automatizált mentés:** Ütemezett biztonsági mentés.
+
+#### 19. Linux szerver telepítése virtuális gépre
+- **Telepítés:** Ubuntu 24.10.
+- **DHCP:** Konfiguráció.
+- **DNS:** Konfiguráció.
+- **HTTP/HTTPS:** LAMP csomag.
+
+#### 20. Cisco Packet Tracer Tesztelés
+- **Tesztelés:** Trunk portok, VLAN elérés, EtherChannel, HSRP, DHCP, DHCPv6, ASA NAT, dinamikus NAT, WiFi kapcsolat, STP, SSH, HTTP/HTTPS, ACL, CBAC, AAA, Syslog, NTP, VPN, hálózatkonfigurációs program.
+
+#### 21. Oracle VM VirtualBox tesztelés
+- **Tesztelés:** Windows szerver, Linux szerver.
+
+#### 22. Felhasznált szoftverek
+- **Szoftverek:** Cisco Packet Tracer, Github, MS Onedrive, MS Planner, MS PowerPoint 2019, MS Word 2019, Oracle VM VirtualBox, Python, Visual Studio Code.
+
+#### 23. Ábrajegyzék
+- **Ábrák:** Teljes topológia, vezetőség topológia, raktár topológia, fejlesztés topológia, kávézó topológia, otthoni kapcsolat, második rétegbeli redundancia, harmadik rétegbeli redundancia, vezeték nélküli internetelérés, FTTB összeköttetés, VPN elérés, hálózati kontroller, NTP konfiguráció, Syslog konfiguráció, Windows szerver telepítése, Linux szerver telepítése, Cisco Packet Tracer tesztelés, Oracle VM VirtualBox tesztelés.
+
+### Angol összefoglaló (3-5 perc)
+
+**Project Name:** Aromas Cubanos Manufactory
+
+**Overview:** Aromas Cubanos is a Cuban cigar manufacturing company founded in 1975. The company has three main locations and a café.
+
+**Objective:** The goal is to create a secure and fast network infrastructure that supports the company's expansion and efficient operation.
+
+**Network Structure:** The infrastructure covers four main locations: manufacturing house and warehouse, development department, management/network center, and café. Various VLANs are established to separate employees, management, and guests.
+
+**Used Network Devices:** Cisco ISR4331 and Cisco 2911 routers, Cisco 2960-24TT switches, Cisco AP access points, and Cisco ASA firewall.
+
+**IPv4 and IPv6 Addressing:** VLSM tables for employees, guests, office workers, security, CEO, middle management, admin, servers, WAN, loopback, ASA, and management.
+
+**IP Configuration:** Examples of configurations for RV, RV-2, SW V, SW V-2, SW V-3, RR, SW R, ASA, RF, RF-2, RK, SW K.
+
+**Redundancy Implementation:** STP protocol for second layer redundancy and HSRP protocol for third layer redundancy.
+
+**Wireless Network Configuration:** Topology for warehouse, development, and café.
+
+**Static and Dynamic Routing:** Static routing for RV, RR, ASA, RK; dynamic routing for ASA, RF.
+
+**Address Translation:** Static NAT for RV and RV-2; dynamic NAT for RV, RR, ASA, RK.
+
+**WAN Connection:** FTTB connection between development and management buildings.
+
+**VPN Implementation:** Home VPN access between RV router and Home User.
+
+**Network Configuration Program:** Testing with a Python program.
+
+**ACLs and ASA Firewall Configuration:** ACLs on RV router; ASA firewall configuration.
+
+**NTP and Syslog Configuration:** NTP and Syslog settings on RV router.
+
+**Complete Network Device Configuration:** Detailed configurations for ISP, RV, RV-2, SwV, SwV-2, SwV-3, RR, SwR, ASA, RF, RF-2, SwF, SwF-2, RK, SwK.
+
+**Windows Server Installation on Virtual Machine:** Installation of Windows Server 2019, Active Directory setup, file and printer sharing, automated software installation, automated backup.
+
+**Linux Server Installation on Virtual Machine:** Installation of Ubuntu 24.10, DHCP configuration, DNS configuration, HTTP/HTTPS setup.
+
+**Cisco Packet Tracer Testing:** Testing trunk ports, VLAN access, EtherChannel, HSRP, DHCP, DHCPv6, ASA NAT, dynamic NAT, WiFi connection, STP, SSH, HTTP/HTTPS, ACL, CBAC, AAA, Syslog, NTP, VPN, network configuration program.
+
+**Oracle VM VirtualBox Testing:** Testing Windows server and Linux server.
+
+**Software Used:** Cisco Packet Tracer, Github, MS Onedrive, MS Planner, MS PowerPoint 2019, MS Word 2019, Oracle VM VirtualBox, Python, Visual Studio Code.
+
+This summary should provide a comprehensive overview of your project in English. If you need any further details or adjustments, feel free to let me know!
